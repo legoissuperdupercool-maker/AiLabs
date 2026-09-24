@@ -1,0 +1,63 @@
+{
+  "name": "ai-labs-office",
+  "productName": "AI Labs Office",
+  "version": "1.0.0",
+  "description": "Run a team of up to 8 AI agents in a 2D pixel office. Works with Claude, ChatGPT, Groq, Gemini, OpenRouter and local models (Ollama, LM Studio).",
+  "main": "electron/main.js",
+  "author": "AI Labs",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "icon": "node scripts/make-icon.js",
+    "mock": "node scripts/mock-llm.js",
+    "dist": "npm run icon && electron-builder --win nsis --x64",
+    "dist:dir": "npm run icon && electron-builder --win dir --x64"
+  },
+  "build": {
+    "appId": "com.ailabs.office",
+    "productName": "AI Labs Office",
+    "copyright": "AI Labs",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "executableName": "AILabsOffice"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "AI Labs Office",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "AI-Labs-Office-Setup-${version}.exe",
+      "license": "LICENSE"
+    }
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0"
+  },
+  "devDependencies": {
+    "electron": "^44.4.5",
+    "electron-builder": "^26.15.3"
+  }
+}
