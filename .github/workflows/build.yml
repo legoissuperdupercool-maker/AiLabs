@@ -34,8 +34,16 @@ jobs:
           path: dist/*.exe
           if-no-files-found: error
 
-      - name: Publish release (tags only)
-        if: startsWith(github.ref, 'refs/tags/v')
+      # Every push gets a downloadable release on the repo's Releases page.
+      - name: Publish release
+        if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || format('build-{0}', github.run_number) }}
+          name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || format('AI Labs Office (build {0})', github.run_number) }}
+          target_commitish: ${{ github.sha }}
+          make_latest: true
+          body: |
+            Download **AI-Labs-Office-Setup-*.exe** below and run it to install AI Labs Office.
+            Windows may show a SmartScreen warning because the installer isn't signed: click *More info → Run anyway*.
           files: dist/*.exe

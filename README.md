@@ -24,7 +24,7 @@ A Windows desktop app where you run a team of up to **8 AI agents** in a 2D pixe
 ## Install (Windows)
 
 1. Get `AI-Labs-Office-Setup-<version>.exe` from one of these places:
-   - the **Releases** page (builds for `v*` tags)
+   - the **Releases** page (every push to GitHub publishes a new build)
    - the **Actions** tab → latest *Build Windows installer* run → artifact
 2. Run it. The installer lets you pick the install folder and creates Start-menu and desktop shortcuts.
 3. Launch **AI Labs Office** and pick a provider on the welcome screen. After that you can hire the starter team in one click.
